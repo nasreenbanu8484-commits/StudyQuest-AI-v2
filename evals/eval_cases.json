@@ -1,0 +1,60 @@
+[
+  {
+    "case_id": "eval_01_planner_roadmap",
+    "agent": "Planner Agent",
+    "description": "Verify Planner creates balanced study roadmap with practice buffers.",
+    "input_vectors": {
+      "name": "Biology",
+      "exam_date_offset_days": 30,
+      "daily_hours": 2.0,
+      "syllabus_text": "Cell Division, Genetics, Human Reproduction, Evolution, Ecology, Biotechnology"
+    },
+    "expected_results": {
+      "topics_created": 6,
+      "buffer_days_allocated": 3,
+      "mock_missions_created": true
+    }
+  },
+  {
+    "case_id": "eval_02_revision_intervals",
+    "agent": "Revision Agent",
+    "description": "Verify Revision Agent schedules intervals correctly based on confidence scale.",
+    "cases": [
+      { "confidence": 1, "expected_days_offset": 1 },
+      { "confidence": 2, "expected_days_offset": 2 },
+      { "confidence": 3, "expected_days_offset": 3 },
+      { "confidence": 4, "expected_days_offset": 5 },
+      { "confidence": 5, "expected_days_offset": 7 }
+    ]
+  },
+  {
+    "case_id": "eval_03_motivation_rewards",
+    "agent": "Motivation Agent",
+    "description": "Verify XP updates, coin increments, and levels upgrades.",
+    "initial_state": { "xp": 380, "level": 1, "coins": 40 },
+    "input_rewards": { "xp": 120, "coins": 15 },
+    "expected_state": { "xp": 500, "level": 2, "coins": 55, "level_up": true }
+  },
+  {
+    "case_id": "eval_04_mcp_memory",
+    "agent": "MCP Server",
+    "description": "Verify study memory key-value pairs are saved and fetched correctly.",
+    "test_key": "preferred_hours",
+    "test_value": "3.5"
+  },
+  {
+    "case_id": "eval_05_coach_insight",
+    "agent": "Coach Agent",
+    "description": "Verify Advisor message includes topic low confidence warnings.",
+    "topic_completed": "Cell Division",
+    "confidence": 2,
+    "expected_keyword_matches": ["low", "confidence", "Cell Division"]
+  },
+  {
+    "case_id": "eval_06_invalid_upload",
+    "agent": "FastAPI Uploads Router",
+    "description": "Verify syllabus upload rejection on unsafe file types.",
+    "unsafe_filename": "exploit.exe",
+    "expected_http_status": 400
+  }
+]

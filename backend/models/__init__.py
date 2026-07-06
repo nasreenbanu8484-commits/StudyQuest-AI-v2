@@ -1,0 +1,1 @@
+# StudyQuest models package initialization
