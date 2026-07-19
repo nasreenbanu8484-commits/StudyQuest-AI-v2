@@ -29,10 +29,16 @@ Follow these steps to import and configure the monorepo on Vercel:
 3. Import your GitHub repository (`StudyQuest-AI`).
 
 ### 2. Configure Monorepo Settings
-Vercel needs to know the Next.js application lives in a subdirectory. Configure these in the setup screen:
+Vercel needs to know the Next.js application lives in a subdirectory. We have preconfigured `vercel.json` files in both the repository root and the `frontend/` directory to support both deployment methods:
+
+- **Option A (Recommended): Set Root Directory to `frontend`**
+  - **Root Directory**: Click **Edit** and select the `frontend` folder (or type `frontend`).
+  - This utilizes `frontend/vercel.json` and runs builds inside the isolated frontend subdirectory.
+- **Option B: Leave Root Directory as `/` (Repo Root)**
+  - This utilizes the root-level `vercel.json` to instruct Vercel to automatically run the install and build commands within the `frontend` subdirectory.
+
 - **Project Name**: `studyquest-ai`
 - **Framework Preset**: `Next.js`
-- **Root Directory**: Click **Edit** and select the `frontend` folder (or type `frontend`). This tells Vercel to build from the frontend context.
 
 ### 3. Setup Build Environment Variables
 Expand the **Environment Variables** accordion. You must specify the production URL of your backend:
