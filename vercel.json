@@ -5,7 +5,8 @@
             "framework": "nextjs"
         },
         "backend": {
-            "root": "backend"
+            "root": "backend",
+            "entrypoint": "app/fast_api_app.py"
         }
     },
     "rewrites": [
